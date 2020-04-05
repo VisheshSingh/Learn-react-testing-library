@@ -1,15 +1,28 @@
 import React from 'react'
 import { render } from '@testing-library/react'
+import user from '@testing-library/user-event'
 import Todo from './Todo'
 import RenderTodos from './RenderTodos'
 
 describe('<Todos />', () => {
-  const mockTodo = { id: 1, todo: 'buy milk' }
+  const mockTodo = { id: 1, todo: 'new todo' }
+
   it('Should render a todo object', () => {
-    const { debug, getByTestId } = render(<Todo todo={mockTodo} />)
+    const { getByTestId } = render(<Todo todo={mockTodo} />)
     // get element by test-id
     const ItemName = getByTestId('itemName')
     expect(ItemName).toHaveTextContent(mockTodo.todo)
+  })
+
+  it('should check if the previous state exists in the input', () => {
+    const { debug, getByPlaceholderText, getByText } = render(
+      <Todo todo={mockTodo} />
+    )
+    const EditBtn = getByText(/edit/i)
+    user.click(EditBtn)
+
+    const updateText = getByPlaceholderText(mockTodo.todo)
+    expect(updateText).toBeInTheDocument()
     debug()
   })
 })
