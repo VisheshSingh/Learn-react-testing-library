@@ -33,3 +33,32 @@ describe('<Todos />', () => {
     expect(updateText).toHaveValue('updated todo')
   })
 })
+
+describe('Edit/ delete todo', () => {
+  const mockUpdateTodo = jest.fn()
+  const mockDeleteTodo = jest.fn()
+  const mockTodo = [{ id: 1, todo: 'wash up' }]
+
+  it('should save an updated todo', () => {
+    const { debug, getByText, getByTestId } = render(
+      <RenderTodos
+        todos={mockTodo}
+        updateTodo={mockUpdateTodo}
+        deleteTodo={mockDeleteTodo}
+      />
+    )
+
+    const EditBtn = getByText('edit')
+    user.click(EditBtn)
+    const updateInput = getByTestId('updateInput')
+    // user.click(updateInput)
+    user.type(updateInput, 'update todo')
+
+    const saveBtn = getByTestId('saveEdits')
+    user.click(saveBtn)
+
+    expect(mockUpdateTodo).toHaveBeenCalled()
+    expect(mockUpdateTodo).toHaveBeenCalledTimes(1)
+    // debug()
+  })
+
