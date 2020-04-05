@@ -17,5 +17,8 @@ it('shoud accept values to add new todo', () => {
   const SubmitBtn = getByText(/add todo/i)
   // fire a click event
   fireEvent.click(SubmitBtn)
+  // Assertion to check if it calls mockAddTodo
+  expect(mockAddTodo).toHaveBeenCalled()
+  expect(mockAddTodo).toHaveBeenCalledTimes(1)
   debug()
 })
