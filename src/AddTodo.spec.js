@@ -4,6 +4,10 @@ import AddTodo from './AddTodo'
 
 it('shoud accept values to add new todo', () => {
   const mockAddTodo = jest.fn()
-  const { debug } = render(<AddTodo addTodo={mockAddTodo} />)
+  const { debug, getByLabelText, getByText } = render(
+    <AddTodo addTodo={mockAddTodo} />
+  )
+  // Get the Input field
+  const Input = getByLabelText(/add todo/i)
   debug()
 })
