@@ -1,5 +1,6 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import user from '@testing-library/user-event'
 import AddTodo from './AddTodo'
 
 it('shoud accept values to add new todo', () => {
@@ -10,7 +11,8 @@ it('shoud accept values to add new todo', () => {
   // Get the Input field
   const Input = getByLabelText(/add todo/i)
   // Fire a change event on input field
-  fireEvent.change(Input, { target: { value: 'a new todo' } })
+  // fireEvent.change(Input, { target: { value: 'a new todo' } })
+  user.type(Input, 'a new todo')
   // Assertion to check if input value matches
   //   expect(Input.value).toContain('a new todo')
   expect(Input).toHaveValue('a new todo')
@@ -18,7 +20,8 @@ it('shoud accept values to add new todo', () => {
   // Get the submit button
   const SubmitBtn = getByText(/add todo/i)
   // fire a click event
-  fireEvent.click(SubmitBtn)
+  // fireEvent.click(SubmitBtn)
+  user.click(SubmitBtn)
   // Assertion to check if it calls mockAddTodo
   expect(mockAddTodo).toHaveBeenCalled()
   expect(mockAddTodo).toHaveBeenCalledTimes(1)
