@@ -12,7 +12,9 @@ it('shoud accept values to add new todo', () => {
   // Fire a change event on input field
   fireEvent.change(Input, { target: { value: 'a new todo' } })
   // Assertion to check if input value matches
-  expect(Input.value).toContain('a new todo')
+  //   expect(Input.value).toContain('a new todo')
+  expect(Input).toHaveValue('a new todo')
+
   // Get the submit button
   const SubmitBtn = getByText(/add todo/i)
   // fire a click event
