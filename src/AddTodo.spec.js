@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import AddTodo from './AddTodo'
 
 it('shoud accept values to add new todo', () => {
