@@ -62,3 +62,22 @@ describe('Edit/ delete todo', () => {
     // debug()
   })
 
+  it('should delete a todo', () => {
+    const { debug, getByText, getByTestId, unmount } = render(
+      <RenderTodos
+        todos={mockTodo}
+        updateTodo={mockUpdateTodo}
+        deleteTodo={mockDeleteTodo}
+      />
+    )
+
+    const deleteBtn = getByText('delete')
+    user.click(deleteBtn)
+    const todoItem = getByTestId('wash-up-wrapper')
+    expect(mockDeleteTodo).toHaveBeenCalled()
+    expect(mockDeleteTodo).toHaveBeenCalledTimes(1)
+    unmount()
+    expect(todoItem).not.toBeInTheDocument()
+    debug()
+  })
+})
