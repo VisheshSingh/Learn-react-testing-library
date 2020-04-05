@@ -15,14 +15,21 @@ describe('<Todos />', () => {
   })
 
   it('should check if the previous state exists in the input', () => {
-    const { debug, getByPlaceholderText, getByText } = render(
-      <Todo todo={mockTodo} />
-    )
+    const { getByPlaceholderText, getByText } = render(<Todo todo={mockTodo} />)
     const EditBtn = getByText(/edit/i)
     user.click(EditBtn)
 
     const updateText = getByPlaceholderText(mockTodo.todo)
     expect(updateText).toBeInTheDocument()
-    debug()
+  })
+
+  it('should update the todo via edit input', () => {
+    const { getByPlaceholderText, getByText } = render(<Todo todo={mockTodo} />)
+    const EditBtn = getByText(/edit/i)
+    user.click(EditBtn)
+
+    const updateText = getByPlaceholderText(mockTodo.todo)
+    user.type(updateText, 'updated todo')
+    expect(updateText).toHaveValue('updated todo')
   })
 })
